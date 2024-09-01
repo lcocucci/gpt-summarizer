@@ -1,0 +1,13 @@
+services:
+  fastapi-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: summarizer_app
+    ports:
+      - "8004:8000"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}  # Utiliza la variable de entorno definida en .env
+    volumes:
+      - ./:/app
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
